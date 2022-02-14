@@ -1,9 +1,21 @@
+import Head from 'next/head';
+
 import { MongoClient } from 'mongodb';
 
 import MeetupList from '../components/meetups/MeetupList';
 
+const url = 'mongodb+srv:';
+
 function HomePage(props) {
-  return <MeetupList meetups={props.meetup} />;
+  return (
+    <>
+      <Head>
+        <title>Meetup app (React NextJs)</title>
+        <meta name='description' content='browse a huge meetup places'/>
+      </Head>
+      <MeetupList meetups={props.meetup} />;
+    </>
+  )
 }
 
 // export async function getServerSideProps(context) {
@@ -17,7 +29,7 @@ function HomePage(props) {
 // }
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect('xxx');
+  const client = await MongoClient.connect(url);
   const db = client.db();
   const meetupCollection = db.collection('meetups');
   const meetups = await meetupCollection.find().toArray();

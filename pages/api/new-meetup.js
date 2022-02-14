@@ -1,11 +1,13 @@
 
 import { MongoClient } from 'mongodb';
 
+const url = 'mongodb+srv:';
+
 async function handler(req, res) {
   if (req.method === 'POST') {
     const data = req.body;
 
-    const client = await MongoClient.connect('xxx');
+    const client = await MongoClient.connect(url);
 
     const db = client.db();
 
